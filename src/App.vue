@@ -13,6 +13,12 @@
       <li class="mr-6">
         <router-link to="/todos" class="text-blue-500 hover:text-blue-800">Todos</router-link>
       </li>
+      <li class="mr-6">
+        <router-link to="/products" class="text-blue-500 hover:text-blue-800">Products</router-link>
+      </li>
+      <li class="mr-6">
+        <router-link to="/cart" class="text-blue-500 hover:text-blue-800">Cart</router-link>
+      </li>
     </ul>
 
     <div class="container mt-3">

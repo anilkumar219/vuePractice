@@ -13,7 +13,7 @@
                 </div>
             </form>
             <div v-if="Object.keys(todos).length">
-                <div class="flex mb-4 items-center" v-for="(todo, index) in todos" :key="index">
+                <div class="flex mb-4 items-center" v-for="(todo, index) in $store.state.todos" :key="index">
                     <p class="w-full"
                         :class="{ 'text-grey-darkest': !todo.completed, 'line-through text-green': todo.completed }">
                         {{ todo.title }}</p>
@@ -36,6 +36,10 @@
 export default {
     name: 'TodosList',
     computed : {
+        todos() {
+            // console.log(this.$store.state.todos.todos);
+            return this.$store.state.todos;
+        },
         addTodoBtnName() {
             if (this.todo.id) {
                 return 'Update';
@@ -45,8 +49,7 @@ export default {
     },
     data() {
         return {
-            url: 'https://vue-demo-13c5f-default-rtdb.asia-southeast1.firebasedatabase.app/',
-            todos: {},
+            // todos: {},
             todo: {
                 id: null,
                 userId: 1,
@@ -67,10 +70,11 @@ export default {
             this.todos = data;
         },
         getList() {
-            fetch('https://vue-demo-13c5f-default-rtdb.asia-southeast1.firebasedatabase.app/todos.json',).then(response => response.json())
+            this.$store.dispatch('asyncFetchTodos');
+            /* fetch('https://vue-demo-13c5f-default-rtdb.asia-southeast1.firebasedatabase.app/todos.json',).then(response => response.json())
                 .then(data => {
                     this.processData(data);
-                });
+                }); */
         },
         editTodo(todo) {
             this.todo = todo;
